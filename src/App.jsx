@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { SWRConfig } from "swr";
 import { BrowserRouter as Router } from "react-router-dom";
 import { request } from "@app/utils/request";
+import { Theme } from "./theme";
 import Routes from "./routes";
 
 const App = () => {
@@ -17,7 +18,9 @@ const App = () => {
               revalidateOnReconnect: false,
             }}
           >
-            <Routes />
+            <Theme>
+              <Routes />
+            </Theme>
           </SWRConfig>
         </Suspense>
       </Router>

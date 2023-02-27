@@ -1,7 +1,8 @@
 import { Navigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import { isUserAuthenticated } from "@app/utils/auth";
 
-const PrivateRoute = () => {
+const PrivateRoute = ({ children }) => {
   const isLoggin = isUserAuthenticated();
 
   if (isLoggin) {
@@ -12,3 +13,7 @@ const PrivateRoute = () => {
 };
 
 export default PrivateRoute;
+
+PrivateRoute.propTypes = {
+  children: PropTypes.node,
+};
