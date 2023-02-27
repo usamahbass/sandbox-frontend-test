@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { request } from "@app/utils/request";
 import { Theme } from "./theme";
 import Routes from "./routes";
+import CoreLayout from "./layouts";
 
 const App = () => {
   return (
@@ -19,7 +20,9 @@ const App = () => {
             }}
           >
             <Theme>
-              <Routes />
+              <CoreLayout>
+                <Routes />
+              </CoreLayout>
             </Theme>
           </SWRConfig>
         </Suspense>
