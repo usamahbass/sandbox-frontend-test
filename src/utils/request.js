@@ -45,13 +45,12 @@ const refreshAuthLogic = (failedRequest) =>
       ] = `Bearer ${newToken}`;
 
       return Promise.resolve();
-    });
-// .catch(() => {
-//   setToken(null);
-//   window.location.replace("/auth/masuk");
-// });
+    })
+    // .catch(() => {
+    //   setToken(null);
+    //   window.location.replace("/auth/masuk");
+    // });
 
 createAuthRefreshInterceptor(request, refreshAuthLogic, {
-  shouldRefresh: (err) =>
-    err.response.data?.data?.msg?.[0] === TOKEN_EXPIRED.DETAIL,
+  shouldRefresh: (err) => err.response.data?.code === TOKEN_EXPIRED.CODE,
 });

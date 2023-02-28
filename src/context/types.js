@@ -1,0 +1,3 @@
+export const SET_USER_DATA = "SET_USER_DATA";
+export const SET_TRIGGER_USER = "SET_TRIGGER_USER";
+export const SET_TRIGGER_TABLE = "SET_TRIGGER_TABLE";

@@ -20,7 +20,7 @@ import {
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 import { request } from "@app/utils/request";
-import { setToken } from "@app/utils/auth";
+import { isUserAuthenticated, setToken } from "@app/utils/auth";
 import Eye from "@app/icons/Eye";
 import Key from "@app/icons/Key";
 import CloseIcon from "@app/icons/Close";
@@ -30,8 +30,11 @@ import UserOctagon from "@app/icons/UserOcatagon";
 const ModalLogin = ({ isOpen, onClose }) => {
   const { pathname } = useLocation();
 
+  const isLoggin = isUserAuthenticated();
+
   const {
     register,
+    setError,
     handleSubmit,
     reset: resetForm,
     formState: { isValid, errors },
@@ -55,10 +58,10 @@ const ModalLogin = ({ isOpen, onClose }) => {
         onClose();
       })
       .catch((err) => {
-        const errorMessage = err.response.data?.data;
+        const errorMessage = err.response.data?.detail;
 
-        setError("username", { message: errorMessage?.msg?.[0] });
-        setError("password", { message: errorMessage?.msg?.[0] });
+        setError("email", { message: errorMessage });
+        setError("password", { message: errorMessage });
       })
       .finally(() => setLoading(false));
   };
@@ -102,7 +105,6 @@ const ModalLogin = ({ isOpen, onClose }) => {
               onClick={() => {
                 onClose();
                 resetForm();
-                router.push(router.pathname);
               }}
             >
               <CloseIcon />
@@ -127,6 +129,7 @@ const ModalLogin = ({ isOpen, onClose }) => {
 
                 <Input
                   h="50px"
+                  type="email"
                   border="1px solid #E9ECEF"
                   borderRadius="10px"
                   placeholder="Email"
@@ -134,7 +137,7 @@ const ModalLogin = ({ isOpen, onClose }) => {
                 />
               </InputGroup>
               {errors?.email && (
-                <FormErrorMessage>
+                <FormErrorMessage fontSize=".75rem">
                   {errors?.email?.message ?? "Harap masukkan email"}
                 </FormErrorMessage>
               )}
@@ -172,7 +175,7 @@ const ModalLogin = ({ isOpen, onClose }) => {
                 </InputRightElement>
               </InputGroup>
               {errors?.password && (
-                <FormErrorMessage>
+                <FormErrorMessage fontSize=".75rem">
                   {errors?.password?.message ?? "Harap masukkan password"}
                 </FormErrorMessage>
               )}

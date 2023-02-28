@@ -1,0 +1,45 @@
+.file-uploader {
+  font-family: "Poppins", sans-serif;
+}
+
+.file-uploader .filepond--drop-label {
+  height: auto;
+  background: white !important;
+  border: 1px solid #eceff3 !important;
+  border-radius: 6px !important;
+}
+
+.filepond--drop-label .filepond--wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.file-uploader .filepond--drop-label .filepond--label-description {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+.file-uploader .filepond--drop-label .filepond--label-action {
+  width: 162px;
+  height: 41px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ff7a00;
+  text-decoration: none;
+  font-size: 14px;
+  gap: 5px;
+  transition: 0.3s ease;
+  font-family: "Poppins", sans-serif;
+  border: 1px solid #ff7a00;
+}
+.file-uploader .filepond--drop-label .filepond--label-action:hover {
+  background-color: #ff7a00;
+  color: white;
+}

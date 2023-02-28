@@ -59,7 +59,7 @@ const HomePage = () => {
     <>
       <PageTitle title="Home" />
 
-      <Container maxW="7xl">
+      <Container maxW="6xl">
         <Box mt="100px">
           <Stack justify="center" align="center" spacing={5}>
             <Text

@@ -8,13 +8,17 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
+import { useStore } from "@app/hooks/useStore";
 import { isUserAuthenticated } from "@app/utils/auth";
 import ModalLogin from "@app/components/ModalLogin";
 import SandboxLogo from "@app/assets/png/logo.png";
 import useScrollDirection, { SCROLL_DOWN } from "@app/hooks/useScrollDirection";
+import UserBox from "./UserBox";
 
 const Header = () => {
   const { search: searchQuery } = useLocation();
+
+  const { state } = useStore();
 
   const loginQuery = new URLSearchParams(searchQuery).get("login");
 
@@ -43,7 +47,13 @@ const Header = () => {
       as="header"
       top={isScrollDir === SCROLL_DOWN ? "-80px" : "0"}
     >
-      <Flex maxW="7xl" height="80px" justifyContent="space-between" alignItems="center" as={Container}>
+      <Flex
+        maxW="6xl"
+        height="80px"
+        justifyContent="space-between"
+        alignItems="center"
+        as={Container}
+      >
         <Box
           flexDir={"row"}
           alignItems="center"
@@ -51,7 +61,7 @@ const Header = () => {
           justifyContent="space-between"
           w={["full", "full", "auto"]}
         >
-          <Box href="/" as={RouterLink}>
+          <Box to="/" as={RouterLink}>
             <Image
               width="125px"
               height="40px"
@@ -61,8 +71,8 @@ const Header = () => {
           </Box>
         </Box>
 
-        {isUserAuth ? (
-          <></>
+        {isUserAuth || state?.user?.data ? (
+          <UserBox />
         ) : (
           <Button
             width="111px"

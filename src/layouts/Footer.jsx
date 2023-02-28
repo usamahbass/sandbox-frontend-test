@@ -12,7 +12,7 @@ const Footer = () => {
       mt="250px"
       bg="#2B2C2B"
     >
-      <Container maxW="7xl" py="12">
+      <Container maxW="6xl" py="12">
         <Flex
           alignItems="center"
           justifyContent="space-between"

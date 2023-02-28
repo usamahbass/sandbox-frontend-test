@@ -44,3 +44,20 @@ export const reFactorDataFromInfinite = (datas) => {
 
   return results;
 };
+
+export const filterValuesObject = (values, keyArray) => {
+  const filterValues = Object.entries(values).filter(
+    ([key]) => !keyArray.includes(key)
+  );
+
+  return Object.fromEntries(filterValues);
+};
+
+export const getNumberList = (index, page = 1, perPage = 5) => {
+  return index + 1 + (parseInt(page ?? 1) - 1) * parseInt(perPage ?? 5);
+};
+
+export const isFile = (input) => {
+  if ("File" in window && input instanceof File) return true;
+  else return false;
+};
