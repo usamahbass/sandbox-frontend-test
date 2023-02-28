@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   Input,
   Select,
@@ -31,8 +32,9 @@ const CreateWisataPage = () => {
   const {
     control,
     register,
+    setError,
     handleSubmit,
-    formState: { isValid },
+    formState: { isValid, errors },
   } = useForm({ mode: "onChange" });
 
   const { data: categoryData } = useSWR(
@@ -76,6 +78,10 @@ const CreateWisataPage = () => {
       })
       .catch((err) => {
         const errorResponse = err.response.data;
+
+        Object.entries(errorResponse).forEach(([key, value]) =>
+          setError(key, { message: value?.[0] })
+        );
       })
       .finally(() => setIsLoadingCreate(false));
   };
@@ -128,7 +134,10 @@ const CreateWisataPage = () => {
             />
           </FormControl>
 
-          <FormControl mb={["10px", "10px", "10px", "32px"]}>
+          <FormControl
+            isInvalid={errors?.name}
+            mb={["10px", "10px", "10px", "32px"]}
+          >
             <FormLabel
               fontWeight={600}
               lineHeight="26px"
@@ -154,6 +163,10 @@ const CreateWisataPage = () => {
                 fontSize: "14px",
               }}
             />
+
+            {errors?.name && (
+              <FormErrorMessage>{errors?.name?.message}</FormErrorMessage>
+            )}
           </FormControl>
 
           <FormControl mb={["10px", "10px", "10px", "32px"]}>
@@ -260,7 +273,10 @@ const CreateWisataPage = () => {
             />
           </FormControl>
 
-          <FormControl mb={["10px", "10px", "10px", "32px"]}>
+          <FormControl
+            isInvalid={errors?.location}
+            mb={["10px", "10px", "10px", "32px"]}
+          >
             <FormLabel
               fontWeight={600}
               lineHeight="26px"
@@ -281,6 +297,12 @@ const CreateWisataPage = () => {
                 </Map>
               )}
             />
+
+            {errors?.location && (
+              <FormErrorMessage display="block !important">
+                {errors?.location?.message}
+              </FormErrorMessage>
+            )}
           </FormControl>
 
           <Stack float="right" mt="5" direction="row" spacing={3}>

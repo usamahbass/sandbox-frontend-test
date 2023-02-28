@@ -22,6 +22,7 @@ import { request } from "@app/utils/request";
 import { useStore } from "@app/hooks/useStore";
 import { setTriggerTable } from "@app/context/actions";
 import { useNavigate } from "react-router-dom";
+import { toRupiah } from "@app/utils/helper";
 
 const ListsWisataMe = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
@@ -60,6 +61,7 @@ const ListsWisataMe = () => {
     {
       header: "Harga",
       accessorKey: "price",
+      cell: ({ row }) => toRupiah(row?.original?.price),
     },
     {
       header: "Kategori",
@@ -106,6 +108,7 @@ const ListsWisataMe = () => {
       <PageTitle title="Wisata Saya" />
 
       <Table
+        withNumber
         title="Wisata Saya"
         columns={columnsListsWisata}
         titleCreate="Tambah Wisata"
