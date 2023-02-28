@@ -5,12 +5,13 @@ import { request } from "@app/utils/request";
 import { Theme } from "./theme";
 import Routes from "./routes";
 import CoreLayout from "./layouts";
+import LoadingGlobal from "./components/LoadingGlobal";
 
 const App = () => {
   return (
     <>
       <Router>
-        <Suspense fallback={<div />}>
+        <Suspense fallback={<LoadingGlobal />}>
           <SWRConfig
             value={{
               fetcher: (resource, init) =>

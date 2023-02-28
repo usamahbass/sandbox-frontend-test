@@ -20,7 +20,9 @@ import {
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 import { request } from "@app/utils/request";
-import { isUserAuthenticated, setToken } from "@app/utils/auth";
+import { setToken } from "@app/utils/auth";
+import { setTriggerUser } from "@app/context/actions";
+import { useStore } from "@app/hooks/useStore";
 import Eye from "@app/icons/Eye";
 import Key from "@app/icons/Key";
 import CloseIcon from "@app/icons/Close";
@@ -30,7 +32,7 @@ import UserOctagon from "@app/icons/UserOcatagon";
 const ModalLogin = ({ isOpen, onClose }) => {
   const { pathname } = useLocation();
 
-  const isLoggin = isUserAuthenticated();
+  const { dispatch } = useStore();
 
   const {
     register,
@@ -56,6 +58,8 @@ const ModalLogin = ({ isOpen, onClose }) => {
         setToken(responseData);
         resetForm();
         onClose();
+
+        dispatch(setTriggerUser(true));
       })
       .catch((err) => {
         const errorMessage = err.response.data?.detail;

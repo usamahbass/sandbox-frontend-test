@@ -74,8 +74,6 @@ const CreateWisataPage = () => {
       })
       .catch((err) => {
         const errorResponse = err.response.data;
-
-        console.log(errorResponse, "HERE");
       })
       .finally(() => setIsLoadingCreate(false));
   };

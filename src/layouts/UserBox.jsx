@@ -44,7 +44,7 @@ const UserBox = ({ ...rest }) => {
         <MenuButton minW={0} rounded="full" variant="link" cursor="pointer">
           <Stack direction="row" alignItems="center">
             <Stack align="flex-end" spacing={5}>
-              <SkeletonCircle isLoaded={true}>
+              <SkeletonCircle isLoaded={!state.user.loading}>
                 <Avatar
                   size="sm"
                   name={state?.user?.data?.full_name}
@@ -62,7 +62,7 @@ const UserBox = ({ ...rest }) => {
                 md: "flex",
               }}
             >
-              <Skeleton isLoaded={true}>
+              <Skeleton w="150px" isLoaded={!state.user.loading}>
                 <Text
                   ml="auto"
                   fontSize="sm"
