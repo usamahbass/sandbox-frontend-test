@@ -33,7 +33,7 @@ const CreateWisataPage = () => {
     register,
     handleSubmit,
     formState: { isValid },
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
   const { data: categoryData } = useSWR(
     "/api/datamaster/tourist-object-category/"
@@ -53,7 +53,9 @@ const CreateWisataPage = () => {
       ...filterValues,
       image: values?.image?.[0],
       location: JSON.stringify(values.location),
-      price: parseInt(replaceAll(values?.price, "Rp", "")),
+      price: parseInt(
+        replaceAll(replaceAll(values?.price, "Rp ", ""), ",", "")
+      ),
     };
 
     const formData = new FormData();

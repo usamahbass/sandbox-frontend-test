@@ -202,10 +202,10 @@ const ChangePasswordPage = () => {
                     <InputGroup>
                       <Input
                         h="50px"
+                        type={showPassword.new ? "text" : "password"}
                         borderRadius="10px"
                         border="1px solid #E9ECEF"
                         placeholder="Masukkan password baru"
-                        type={showPassword ? "text" : "password"}
                         {...register("new_password", { required: true })}
                       />
 
@@ -248,7 +248,7 @@ const ChangePasswordPage = () => {
                         borderRadius="10px"
                         border="1px solid #E9ECEF"
                         placeholder="Masukkan konfirmasi password baru"
-                        type={showPassword ? "text" : "password"}
+                        type={showPassword.new_confirm ? "text" : "password"}
                         {...register("new_password_confirm", {
                           required: true,
                         })}
